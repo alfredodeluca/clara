@@ -1,0 +1,9 @@
+---
+# tasks file for common
+- name: Run apt update
+  apt:
+    update_cache: true
+
+- name: Run apt upgrade
+  apt:
+    upgrade: dist

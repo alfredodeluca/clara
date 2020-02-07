@@ -1,0 +1,19 @@
+---
+- hosts: joomla1 joomla2
+  become: true
+
+  roles:
+    - common
+
+- hosts: joomla-lb
+  become: true
+
+  roles:
+    - common
+    - haproxy
+  vars:
+    haproxy_app_name: joomla
+    haproxy_enable_stats: false
+    haproxy_backend_servers:
+      - {name: joomla1, ip: joomla1, port: 80, paramstring: cookie A check}
+      - {name: joomla2, ip: joomla2, port: 80, paramstring: cookie A check}
