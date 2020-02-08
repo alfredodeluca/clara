@@ -7,3 +7,8 @@
 - name: Run apt upgrade
   apt:
     upgrade: dist
+
+- name: Install unzip
+  apt:
+    pkg: unzip
+    state: present

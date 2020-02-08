@@ -10,6 +10,7 @@
 
   roles:
     - common
+    - MySql
 
 - hosts: joomla-lb
   become: true
