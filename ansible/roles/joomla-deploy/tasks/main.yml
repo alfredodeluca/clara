@@ -1,0 +1,47 @@
+---
+# tasks file for joomla-deploy
+- name: Install apache2
+  apt:
+    pkg: apache2
+    state: present
+    update_cache: true
+  register: install_apache2
+
+- name: Download Joomla package
+  get_url:
+    url: https://downloads.joomla.org/cms/joomla3/3-9-14/Joomla_3.9.14-Stable-Full_Package.zip
+    dest: ~root
+
+
+- name: Create a directory for Joomla
+  file:
+    path: /var/www/html/joomla
+    state: directory
+
+- name: Check if the directory is not empty
+  shell: |
+    ls /var/www/html/joomla
+  register: dir_empty
+
+- name: unzip Joomla onto the directory
+  command: unzip /root/Joomla_3.9.14-Stable-Full_Package.zip -d /var/www/html/joomla
+  when: dir_empty.stdout_lines|length == 0
+
+
+- name: Copy htaccess
+  copy:
+    src: /var/www/html/joomla/htaccess.txt
+    dest: /var/www/html/joomla/.htaccess
+    remote_src: true
+
+- name: Change owner and mode
+  file:
+    path: /var/www/html/joomla
+    owner: www-data
+    group: www-data
+    mode: '755'
+
+- name: Restart apache
+  service:
+    name: apache2
+    state: restarted

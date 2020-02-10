@@ -4,6 +4,7 @@
 
   roles:
     - common
+    - joomla-deploy
 
 - hosts: joomla-db
   become: true

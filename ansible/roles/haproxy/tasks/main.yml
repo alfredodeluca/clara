@@ -1,5 +1,6 @@
+---
 - name: Install HAProxy
-  yum:
+  apt:
     pkg: haproxy
     state: present
     update_cache: true
@@ -9,14 +10,14 @@
   template:
     src: templates/haproxy.cfg
     dest: /etc/haproxy/haproxy.cfg
-    backup: yes
+    backup: true
   register: haproxy_update_config
 
 - name: Start and enable haproxy service
   service:
     name: haproxy
     state: started
-    enabled: yes
+    enabled: true
 
 - name: Reload HAProxy
   service:
