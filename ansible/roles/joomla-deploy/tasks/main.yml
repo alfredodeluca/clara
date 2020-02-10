@@ -7,11 +7,26 @@
     update_cache: true
   register: install_apache2
 
+- name: Install php
+  apt:
+    pkg:
+      - php
+      - libapache2-mod-php
+      - php-cli
+      - php-common
+      - php-mbstring
+      - php-gd
+      - php-intl
+      - php-xml
+      - php-mysql
+      - php-zip
+      - php-curl
+      - php-xmlrpc
+
 - name: Download Joomla package
   get_url:
     url: https://downloads.joomla.org/cms/joomla3/3-9-14/Joomla_3.9.14-Stable-Full_Package.zip
     dest: ~root
-
 
 - name: Create a directory for Joomla
   file:
