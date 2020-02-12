@@ -25,7 +25,7 @@
 
 - name: Download Joomla package
   get_url:
-    url: https://downloads.joomla.org/cms/joomla3/3-9-14/Joomla_3.9.14-Stable-Full_Package.zip
+    url: https://github.com/joomla/joomla-cms/releases/download/{{joomla_version}}/Joomla_{{joomla_version}}-Stable-Full_Package.zip
     dest: ~root
 
 - name: Create a directory for Joomla
@@ -39,7 +39,7 @@
   register: dir_empty
 
 - name: unzip Joomla onto the directory
-  command: unzip /root/Joomla_3.9.14-Stable-Full_Package.zip -d /var/www/html/joomla
+  command: unzip /root/Joomla_{{joomla_version}}-Stable-Full_Package.zip -d /var/www/html/joomla
   when: dir_empty.stdout_lines|length == 0
 
 

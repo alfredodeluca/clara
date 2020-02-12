@@ -1,2 +1,3 @@
 ---
 # defaults file for joomla-deploy
+joomla_version: 3.9.15
